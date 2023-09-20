@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="font-weight: bold;color:white">Login</h1>
+    <form action="{% url 'accounts:login' %}" class="site-form" method="post">
+        {% csrf_token %}
+        {{ form }}
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+        {% endif %}
+        <input type="submit" value="Login">
+    </form>
+    <p style="font-weight: lighter;color:white">Not registered? <a href="{% url 'accounts:signup' %}" style="font-weight: bold;color:crimson">Signup</a></p>
+    <p style="font-weight: lighter;color:white">Maintenance? <a href="{% url 'admin:index' %}" style="font-weight: bold;color:crimson">Admin</a></p>
+{% endblock %}

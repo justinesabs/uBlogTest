@@ -1,0 +1,43 @@
+{% load static %}
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uBLOG</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header class="wrapper">
+        <!-- <a href="{% url 'homepage' %}">Home</a> -->
+        
+        <!-- <a href="{% url 'blogs:blogs' %}">Blogs</a> -->
+        <a href="{% url 'blogs:blogs' %}"><img class="logo" src="{% static 'logo.png' %}" alt="logo.png"></a>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'accounts:logout' %}" class="logout-link" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="{% url 'blogs:create' %}" class="highlight">Create</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'accounts:login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <div class="wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

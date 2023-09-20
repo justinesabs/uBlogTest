@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="font-weight: bold;color:white">Blogs</h1>
+    {% if user.is_authenticated and user != blog.author %}
+        <div>Your Blogs</div>
+        <div class="blogs">
+            {% for blog in blogs %}
+                {% if user.is_authenticated and user == blog.author %}
+                <div>
+                    <div class="blog-date">
+                        {{ blog.date }}
+                    </div>
+                        <div class="blog">
+                            <a href="{% url 'blogs:blog' slug=blog.slug %}">
+                                <h2>{{ blog.title }}</h2>
+                            </a>
+                            <div class="blog-content">
+                                {{ blog.snippet }}
+                            </div>
+                            
+                            
+                            <div  class="author">
+                                <div class="author-text">
+                                    
+                                    <div>
+                                        Author 
+                                    </div> 
+                                    
+                                </div>
+                                
+                                <div class="author-text-author"> {{ blog.author }} </div>
+                            </div>
+                            
+                        </div>
+                </div>
+                {% endif %}
+            
+            {% endfor %}
+        </div>
+        <div>Other's Blogs</div>
+        <div class="blogs">
+            {% for blog in blogs %}
+                {% if user.is_authenticated and user != blog.author %}
+                <div>
+                    <div class="blog-date">
+                        {{ blog.date }}
+                    </div>
+                        <div class="blog">
+                            <a href="{% url 'blogs:blog' slug=blog.slug %}">
+                                <h2>{{ blog.title }}</h2>
+                            </a>
+                            <div class="blog-content">
+                                {{ blog.snippet }}
+                            </div>
+                            
+                            
+                            <div  class="author">
+                                <div class="author-text">
+                                    
+                                    <div>
+                                        Author 
+                                    </div> 
+                                    
+                                </div>
+                                
+                                <div class="author-text-author"> {{ blog.author }} </div>
+                            </div>
+                            
+                        </div>
+                </div>
+                {% endif %}
+            
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if not user.is_authenticated %}
+        <div class="blogs">
+            {% for blog in blogs %}
+            
+                <div>
+                    <div class="blog-date">
+                        {{ blog.date }}
+                    </div>
+                        <div class="blog">
+                            <a href="{% url 'blogs:blog' slug=blog.slug %}">
+                                <h2>{{ blog.title }}</h2>
+                            </a>
+                            <div class="blog-content">
+                                {{ blog.snippet }}
+                            </div>
+                            
+                            
+                            <div  class="author">
+                                <div class="author-text">
+                                    
+                                    <div>
+                                        Author 
+                                    </div> 
+                                    
+                                </div>
+                                
+                                <div class="author-text-author"> {{ blog.author }} </div>
+                            </div>
+                            
+                        </div>
+                </div>
+            
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+{% endblock %}

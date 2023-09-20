@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="update-blog">
+        <h1>Update a Blog</h1>
+        <form action="{% url 'blogs:update' slug=blog.slug %}" class="site-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    <script src="/static/slugify.js"></script>
+{% endblock %}

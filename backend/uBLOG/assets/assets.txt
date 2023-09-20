@@ -1,0 +1,1 @@
+put assets like .css or .js files in this directory
